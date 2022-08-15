@@ -1,0 +1,286 @@
+<mah:MetroWindow
+	x:Class="AutoViewFB.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:local="clr-namespace:AutoViewFB" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+	ResizeMode="CanMinimize"
+	WindowStartupLocation="CenterScreen"
+	Title="Auto View FB"
+	Height="600"
+	Width="800"
+	Loaded="MetroWindow_Loaded">
+	<mah:MetroWindow.RightWindowCommands>
+		<mah:WindowCommands>
+			<Button>
+				<StackPanel
+					Orientation="Horizontal">
+					<iconPacks:PackIconFontAwesome
+						Kind="{x:Static iconPacks:PackIconFontAwesomeKind.FirefoxBrands}"
+						Width="16"
+						Height="16" />
+				</StackPanel>
+			</Button>
+		</mah:WindowCommands>
+	</mah:MetroWindow.RightWindowCommands>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition
+				Height="5" />
+			<RowDefinition
+				Height="40" />
+		</Grid.RowDefinitions>
+		<Grid
+			Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="250" />
+			</Grid.ColumnDefinitions>
+			<DataGrid
+				Name="dtgMain"
+				Grid.Column="0"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				AutoGenerateColumns="False"
+				IsReadOnly="True"
+				MouseDoubleClick="DtgMain_MouseDoubleClick">
+				<DataGrid.Columns>
+					<DataGridTextColumn
+						MinWidth="150"
+						Width="150"
+						Header="UID"
+						Binding="{Binding Uid}" />
+					<DataGridTextColumn
+						MinWidth="150"
+						Width="150"
+						Header="Proxy"
+						Binding="{Binding Proxy}" />
+					<DataGridTextColumn
+						MinWidth="150"
+						Width="*"
+						Header="Status"
+						Binding="{Binding StatusDisplay}" />
+				</DataGrid.Columns>
+				<FrameworkElement.ContextMenu>
+					<ContextMenu>
+						<MenuItem
+							Header="Copy Uid"
+							Click="MenuIemCPUid_Click" />
+						<MenuItem
+							Header="Copy Proxy"
+							Click="MenuIemCPProxy_Click" />
+						<MenuItem
+							Header="Copy All"
+							Click="MenuIemCPAll_Click" />
+						<MenuItem
+							Header="Save Data"
+							Click="MenuIemSaveData_Click" />
+					</ContextMenu>
+				</FrameworkElement.ContextMenu>
+			</DataGrid>
+			<Grid
+				Column="1"
+				Width="250">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="*" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+					<RowDefinition
+						Height="auto" />
+				</Grid.RowDefinitions>
+				<Grid
+					Row="0"
+					Margin="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="auto" />
+						<ColumnDefinition
+							Width="auto" />
+					</Grid.ColumnDefinitions>
+					<ComboBox
+						Name="cbLoadFrom"
+						Grid.Column="0"
+						SelectionChanged="CbLoadFrom_SelectionChanged">
+						<ComboBoxItem>Load from File</ComboBoxItem>
+						<ComboBoxItem>Load from Server</ComboBoxItem>
+					</ComboBox>
+					<TextBox
+						Name="txbFromAcc"
+						Grid.Column="1"
+						Margin="3 0 3 0"
+						mah:TextBoxHelper.UseFloatingWatermark="True"
+						mah:TextBoxHelper.Watermark="From"
+						Visibility="Collapsed"
+						TextChanged="TxbFromAcc_TextChanged" />
+					<TextBox
+						Name="txbToAcc"
+						Grid.Column="2"
+						mah:TextBoxHelper.UseFloatingWatermark="True"
+						mah:TextBoxHelper.Watermark="To"
+						Visibility="Collapsed"
+						TextChanged="TxbToAcc_TextChanged" />
+				</Grid>
+				<Grid
+					Row="1"
+					Margin="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<CheckBox
+						Name="chkFakeUA"
+						Grid.Column="0"
+						Content="U.A"
+						Checked="ChkFakeUA_Click"
+						Unchecked="ChkFakeUA_Click" />
+					<CheckBox
+						Name="chkOffImage"
+						Grid.Column="1"
+						Content="Image"
+						HorizontalAlignment="Center"
+						Checked="ChkOffImage_Click"
+						Unchecked="ChkOffImage_Click" />
+					<CheckBox
+						Name="chkOffProxy"
+						Grid.Column="2"
+						Content="Proxy"
+						HorizontalAlignment="Center"
+						Checked="ChkOffProxy_Click"
+						Unchecked="ChkOffProxy_Click" />
+					<CheckBox
+						Name="chkLoginMBasic"
+						Grid.Column="3"
+						Content="mBasic"
+						HorizontalAlignment="Right"
+						Checked="ChkLoginMBasic_Click"
+						Unchecked="ChkLoginMBasic_Click" />
+				</Grid>
+				<TextBox
+					Name="txbTotalThreads"
+					Grid.Row="2"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Số Thread"
+					TextChanged="TxbTotalThreads_TextChanged" />
+				<TextBox
+					Name="txbTotalTabs"
+					Grid.Row="3"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Số Tab"
+					TextChanged="TxbTotalTabs_TextChanged" />
+				<TextBox
+					Name="txbLinkFanpage"
+					Grid.Row="4"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Link Fanpage"
+					TextChanged="TxbLinkFanpage_TextChanged" />
+				<TextBox
+					Name="txbContent"
+					Grid.Row="5"
+					Margin="3"
+					TextWrapping="Wrap"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Nội dung tìm kiếm"
+					TextChanged="TxbContent_TextChanged" />
+				<TextBox
+					Name="txbCloseChromeAfterMinute"
+					Grid.Row="6"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Đóng Chrome sau ... phút"
+					TextChanged="TxbCloseChromeAfterMinute_TextChanged" />
+				<TextBox
+					Name="txbRepeat"
+					Grid.Row="7"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Số lần lặp lại"
+					TextChanged="TxbRepeat_TextChanged" />
+				<TextBox
+					Name="txbDelayThread"
+					Grid.Row="8"
+					Margin="3"
+					mah:TextBoxHelper.UseFloatingWatermark="True"
+					mah:TextBoxHelper.Watermark="Delay giữa các Thread (ms)"
+					TextChanged="TxbDelayThread_TextChanged" />
+				<Grid
+					Row="9">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition
+							Width="3" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Button
+						Name="btnLoadSettings"
+						Grid.Column="0"
+						Content="Load Settings"
+						Click="BtnLoadSettings_Click" />
+					<Button
+						Name="btnCloseChrome"
+						Grid.Column="2"
+						Content="Đóng Chrome"
+						Click="BtnCloseChrome_Click" />
+				</Grid>
+			</Grid>
+		</Grid>
+		<ProgressBar
+			Name="mainProgressBar"
+			Grid.Row="1" />
+		<Label
+			Name="lbStatus"
+			Content="Status: Stopped"
+			Grid.Row="2"
+			Width="110"
+			HorizontalAlignment="Left"
+			Margin="5 0 0 5"
+			VerticalAlignment="Bottom" />
+		<Label
+			Name="lbChecked"
+			Content="Checked: 0/0"
+			Grid.Row="2"
+			Width="110"
+			HorizontalAlignment="Left"
+			Margin="120 0 0 5"
+			VerticalAlignment="Bottom" />
+		<Button
+			Name="btnStart"
+			Grid.Row="2"
+			Content="Start"
+			Width="100"
+			HorizontalAlignment="Right"
+			IsEnabled="False"
+			Margin="0 0 5 5"
+			VerticalAlignment="Bottom"
+			Click="BtnStart_Click" />
+		<Button
+			Name="btnLoad"
+			Grid.Row="2"
+			Content="Load"
+			Width="100"
+			HorizontalAlignment="Right"
+			Margin="0 0 110 5"
+			VerticalAlignment="Bottom"
+			Click="BtnLoad_Click" />
+	</Grid>
+</mah:MetroWindow>
